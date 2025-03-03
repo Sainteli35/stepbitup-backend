@@ -1,0 +1,16 @@
+nohup: ignoring input
+Server running on port 5000
+🚀 Fetching BTC balance for: 3NTU91XrGTzPtE2jTH1zpRqFq7xTWsJsBz
+🔗 Making request to: https://btcbook.nownodes.io/api/v2/address/3NTU91XrGTzPtE2jTH1zpRqFq7xTWsJsBz
+✅ API Response: {
+  "page": 1,
+  "totalPages": 1,
+  "itemsOnPage": 1000,
+  "address": "3NTU91XrGTzPtE2jTH1zpRqFq7xTWsJsBz",
+  "balance": "0",
+  "totalReceived": "0",
+  "totalSent": "0",
+  "unconfirmedBalance": "0",
+  "unconfirmedTxs": 0,
+  "txs": 0
+}
