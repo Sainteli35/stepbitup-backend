@@ -9,19 +9,25 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Step Tracking API
+// ✅ STATUS ROUTE
+app.get('/api/status', (req, res) => {
+    res.json({ status: "Backend is running!" });
+});
+
+// ✅ Step Tracking API
 const stepRoutes = express.Router();
 stepRoutes.post('/', (req, res) => {
     const { steps, user } = req.body;
     if (!steps || !user) return res.status(400).json({ error: "Missing data" });
-    res.json({ message: "Steps recorded", user, steps, btcEarned: steps * 0.0000001 });
+    res.json({ message: "Steps recorded", user, steps, btcEarned: steps * 0.0001 });
 });
 app.use('/api/steps', stepRoutes);
 
-// BTC Wallet API
+// ✅ BTC Wallet API
 const btcRoutes = express.Router();
 btcRoutes.get('/', (req, res) => {
     res.json({ balance: "0.00321000 BTC" });
@@ -33,27 +39,20 @@ btcRoutes.post('/withdraw', (req, res) => {
 });
 app.use('/api/btc', btcRoutes);
 
-// Energy System API
+// ✅ Energy System API
 const energyRoutes = express.Router();
 energyRoutes.post('/refill', (req, res) => {
     res.json({ message: "Energy refilled!", newEnergyLevel: 100 });
 });
 app.use('/api/energy', energyRoutes);
 
-// NFT Badge API
+// ✅ NFT Badge API
 const nftRoutes = express.Router();
 nftRoutes.get('/', (req, res) => {
     res.json({ badges: [{ name: "OG User", boost: "2x BTC" }, { name: "Marathon Master", boost: "1.5x BTC" }] });
 });
 app.use('/api/nft', nftRoutes);
 
-app.listen(PORT, () => console.log(`StepBitUp Backend running on port ${PORT}`));
-
-// GitHub Integration Instructions
-// 1. Run `git init` if not initialized.
-// 2. Add remote repository: `git remote add origin https://github.com/yourusername/StepBitUp-backend.git`
-// 3. Commit and push updates: 
-//    git add .
-//    git commit -m "Initialized backend with APIs"
-//    git push origin main
+// Start Server
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 StepBitUp Backend running on port ${PORT}`));
 
